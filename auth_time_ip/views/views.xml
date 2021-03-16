@@ -1,0 +1,56 @@
+<odoo>
+  <!-- Inherit Form View to Modify it -->
+      <record id="auth_time_ip_company_form" model="ir.ui.view">
+      <field name="name">Auth Time IP</field>
+      <field name="model">res.company</field>
+      <field name="inherit_id" ref="base.view_company_form"/>
+      <field name="arch" type="xml">
+
+          <xpath expr="//notebook[last()]" position="inside">
+              <page string="Authentication">
+                <group>
+                  <group string="Time Authentication">
+                      <field name="time_auth" />
+                      <field name="from_time" placeholer="Time in 24hrs" widget="time" attrs="{'invisible': [('time_auth','!=',True)]}"/>
+                      <field name="to_time" placeholer="Time in 24hrs"  widget="time" attrs="{'invisible': [('time_auth','!=',True)]}"/>
+                  </group>
+                  <group string="IP Authentication">
+                      <field name="ip_auth" />
+                      <field name="country" attrs="{'invisible': [('ip_auth','!=',True)]}"/>
+                      <field name="ip_domain" attrs="{'invisible': [('ip_auth','!=',True)]}"/>
+                  </group>
+                </group>
+              </page>
+          </xpath>
+
+      </field>
+  </record>
+
+  <record id="auth_time_ip_user_form" model="ir.ui.view">
+      <field name="name">Auth Time IP</field>
+      <field name="model">res.users</field>
+      <field name="inherit_id" ref="base.view_users_form"/>
+      <field name="arch" type="xml">
+
+          <xpath expr="//notebook[last()]" position="inside">
+              <page string="Authentication">
+                <group>
+                  <group string="Time Authentication">
+                      <field name="time_auth" />
+                      <field name="from_time" widget="float_time" attrs="{'invisible': [('time_auth','!=',True)]}"/>
+                      <field name="to_time" widget="float_time" attrs="{'invisible': [('time_auth','!=',True)]}"/>
+                      <field name="days" widget="many2many_tags" attrs="{'invisible': [('time_auth','!=',True)]}"/>
+                      <field name="index_days" attrs="{'invisible': [('time_auth','!=',True)]}"/>
+                  </group>
+                  <group string="IP Authentication">
+                      <field name="ip_auth" />
+                      <field name="country" attrs="{'invisible': [('ip_auth','!=',True)]}"/>
+                      <field name="ip_domain" attrs="{'invisible': [('ip_auth','!=',True)]}"/>
+                  </group>
+                </group>
+              </page>
+          </xpath>
+
+      </field>
+  </record>
+</odoo>
