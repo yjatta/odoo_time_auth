@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Time &IP Authentation",
+    'name': "Time Authentation IP Authentation",
     'summary': """
         User Time Authentation and IP Authentation""",
     'license': 'GPL-3',
