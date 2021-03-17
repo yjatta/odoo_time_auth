@@ -64,10 +64,8 @@ class AuthTimeIP(models.Model):
                     raise SessionExpiredException("You Cannot access the system after work hours")
                 return True
 
-
     def _check_out_of_time(self, user):
         days = user.index_days.split(",")
-        print(days)
         for day in days:
             if datetime.now().day == int(day) :
                 return True
@@ -96,7 +94,6 @@ class AuthTimeIP(models.Model):
             raise AccessDenied()
         ip = request.httprequest.environ['REMOTE_ADDR'] if request else 'n/a'
         _logger.info("MY IP: %s", ip)
-        print(ip)
         try:
             with cls.pool.cursor() as cr:
                 self = api.Environment(cr, SUPERUSER_ID, {})[cls._name]

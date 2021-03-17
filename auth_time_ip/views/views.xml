@@ -16,7 +16,6 @@
                   </group>
                   <group string="IP Authentication">
                       <field name="ip_auth" />
-                      <field name="country" attrs="{'invisible': [('ip_auth','!=',True)]}"/>
                       <field name="ip_domain" attrs="{'invisible': [('ip_auth','!=',True)]}"/>
                   </group>
                 </group>
@@ -40,11 +39,10 @@
                       <field name="from_time" widget="float_time" attrs="{'invisible': [('time_auth','!=',True)]}"/>
                       <field name="to_time" widget="float_time" attrs="{'invisible': [('time_auth','!=',True)]}"/>
                       <field name="days" widget="many2many_tags" attrs="{'invisible': [('time_auth','!=',True)]}"/>
-                      <field name="index_days" attrs="{'invisible': [('time_auth','!=',True)]}"/>
+                      <field name="index_days" invisible="1"/>
                   </group>
                   <group string="IP Authentication">
                       <field name="ip_auth" />
-                      <field name="country" attrs="{'invisible': [('ip_auth','!=',True)]}"/>
                       <field name="ip_domain" attrs="{'invisible': [('ip_auth','!=',True)]}"/>
                   </group>
                 </group>
