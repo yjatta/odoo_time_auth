@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Time and IP Authentation",
+    'name': "Time &IP Authentation",
     'summary': """
-        User Time and IP Authentation""",
+        User Time Authentation and IP Authentation""",
     'license': 'GPL-3',
     'description': """
         Users cannot access the system in a specified time range
