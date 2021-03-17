@@ -36,12 +36,17 @@ class AuthTimeIP(models.Model):
             for day in rec.days:
                 indexes += str(day.index) + ","
             rec.index_days = indexes.rstrip(",")
-    def _check_ip_authentication(self, user, ip):
+
+    def _check_ip(self, user, ip):
         ip_list = str(user.ip_domain).split(',')
         if user.ip_auth:
             for ip_address in ip_list:
                if ip_address == ip:
-                   return
+                   return False
+            return True
+
+    def _check_ip_authentication(self, user, ip):
+        if self._check_ip(user,ip):
             raise AccessDenied("Your IP is NOT Authorized")
 
 
@@ -56,9 +61,16 @@ class AuthTimeIP(models.Model):
         :param session:
         :return:
         """
+        ip = request.httprequest.environ['REMOTE_ADDR'] if request else 'n/a'
 
         if user.time_auth:
             if self._check_out_of_time(user):
+                if session.db and session.uid:
+                    session.logout(keep_db=True)
+                    raise SessionExpiredException("You Cannot access the system after work hours")
+                return True
+        if user.ip_auth:
+            if self._check_ip(user,ip):
                 if session.db and session.uid:
                     session.logout(keep_db=True)
                     raise SessionExpiredException("You Cannot access the system after work hours")
